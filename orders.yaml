@@ -1,0 +1,25 @@
+orders:
+  - orderid: ORD-2025-0001
+    customer: ACME Mobility GmbH
+    positions:
+      - name: talos-nocloud-secureboot-raw-amd64
+        product: talos
+        version: { type: latest }
+        platform: nocloud
+        image_format: raw.xz
+        arch: amd64
+        decompress_raw: true
+        secureboot: true
+        customization:
+          extraKernelArgs: [ "console=ttyS0,115200" ]
+          systemExtensions:
+            officialExtensions:
+              - siderolabs/amd-ucode
+              - siderolabs/binfmt-misc
+              - siderolabs/btrfs
+        push:
+          enabled: true
+          prefer_decompressed: true
+          hosts:
+            - host: pve-01.example.lan
+            - host: pve-02.example.lan

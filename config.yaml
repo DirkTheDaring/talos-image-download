@@ -1,0 +1,24 @@
+defaults:
+  arch: amd64
+  cache_dir: /var/cache/talos-sync
+  proxmox_default_iso_dir: /var/lib/vz/template/iso
+
+  push:
+    enabled: true
+    rsync_opts: "-av --progress --inplace"
+    ssh_opts: "-o BatchMode=yes"
+    prefer_decompressed: true
+
+  cache_policy:
+    enabled: true
+    keep_versions: 3
+    purge_before: false   # set true (or use --purge-cache) to wipe cache before run
+
+# Per-order manifest settings:
+manifest:
+  # Option A (recommended): write all manifests into a directory:
+  dir: /var/cache/talos-sync/manifests
+  # Option B: use a template (overrides dir if set):
+  # path_template: /var/cache/talos-sync/manifests/manifest-{orderid}.yaml
+  # Option C: legacy path; will become '...-<orderid>.yaml' automatically:
+  # path: /var/cache/talos-sync/manifest.yaml
